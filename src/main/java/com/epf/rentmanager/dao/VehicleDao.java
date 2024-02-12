@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.persistence.ConnectionManager;
 
 public class VehicleDao {
@@ -28,6 +29,9 @@ public class VehicleDao {
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle;";
 	
 	public long create(Vehicle vehicle) throws DaoException {
+
+
+
 		return 0;
 	}
 
