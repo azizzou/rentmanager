@@ -15,7 +15,18 @@ public class Vehicle {
         this.constructeur = constructeur;
         this.modele = modele;
     }
-
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setId(long id) {
+        this.id =  new Integer(Math.toIntExact(id));
+    }
+    public void setConstructeur (String constructeur) {
+        this.constructeur = constructeur;
+    }
+    public void setNb_places(int nb_places) {
+        this.id = nb_places;
+    }
     public int getId() {
         return id;
     }

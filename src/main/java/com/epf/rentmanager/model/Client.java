@@ -3,6 +3,8 @@ package com.epf.rentmanager.model;
 import java.sql.Date;
 import java.time.LocalDate ;
 
+
+
 public class Client {
 private int id ;
 private String nom , prenom, email;
@@ -19,6 +21,25 @@ private LocalDate naissance;
                 '}';
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setId(long id) {
+        this.id =  new Integer(Math.toIntExact(id));
+    }
+
+    public void setNom (String nom) {
+        this.nom = nom;
+    }
+    public void setPrenom (String nom) {
+        this.prenom = prenom;
+    }
+    public void setEmail (String nom) {
+        this.email = email;
+    }
+    public void setNaissance (LocalDate naissance) {
+        this.naissance = naissance;
+    }
 
     public Client() {
 

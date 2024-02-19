@@ -20,8 +20,32 @@ public class Reservation {
         this.fin= fin ;
 
     }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setId(long id) {
+        this.id =  new Integer(Math.toIntExact(id));
+    }
+    public void setClient_id (int client_id) {
+        this.client_id = client_id;
+    }
+    public void setClient_id(long client_id) {
+        this.client_id =  new Integer(Math.toIntExact(client_id));
+    }
 
+    public void setVehicle_id (int vehicle_id) {
+        this.vehicle_id = vehicle_id;
+    }
+    public void setVehicle_id(long vehicle_id) {
+        this.vehicle_id =  new Integer(Math.toIntExact(vehicle_id));
+    }
 
+    public void setDebut (LocalDate debut) {
+        this.debut = debut;
+    }
+    public void setFin (LocalDate fin) {
+        this.fin = fin;
+    }
     public int getId() {
         return id;
     }

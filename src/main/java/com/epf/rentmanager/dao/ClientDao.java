@@ -69,25 +69,54 @@ public class ClientDao {
 		}
 	}
 
-	public Client findById(long id) throws DaoException , SQLException {
+	public Client s(long id) throws DaoException, SQLException {
 
+		try (Connection connection = DriverManager.getConnection("jdbc:h2:~/RentManagerDatabase", "", "");
+			 PreparedStatement preparedStatement = connection.prepareStatement(FIND_CLIENT_QUERY)) {
 
+			preparedStatement.setLong(1, id);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					Client client = new Client();
+					client.setId(id);
+					client.setNom(resultSet.getString("nom"));
+					client.setPrenom(resultSet.getString("prenom"));
+					client.setEmail(resultSet.getString("email"));
+					client.setNaissance(resultSet.getDate("naissance").toLocalDate());
 
-		try {
-			Connection connexion = DriverManager.getConnection("jdbc:h2:~/RentManagerDatabase", "", "");
-			PreparedStatement preparedStatement = connexion.prepareStatement(FIND_CLIENT_QUERY);
-			preparedStatement.setInt(1, (int) id);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			String nom = resultSet.getString("nom");
-			String prenom = resultSet.getString("prenom");
-			String email = resultSet.getString("email");
+					return client;
+				} else {
+
+					return null;
+				}
+			}
+
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} return null;
+			throw new DaoException(e);
+		}
 	}
-
 	public List<Client> findAll() throws DaoException {
-		return new ArrayList<Client>();
-	}
+		List<Client> clients = new ArrayList<>();
 
+		try (Connection connection = DriverManager.getConnection("jdbc:h2:~/RentManagerDatabase", "", "");
+			 PreparedStatement preparedStatement = connection.prepareStatement(FIND_CLIENTS_QUERY);
+			 ResultSet resultSet = preparedStatement.executeQuery()) {
+
+			while (resultSet.next()) {
+				Client client = new Client();
+				client.setId(resultSet.getLong("id"));
+				client.setNom(resultSet.getString("nom"));
+				client.setPrenom(resultSet.getString("prenom"));
+				client.setEmail(resultSet.getString("email"));
+				client.setNaissance(resultSet.getDate("naissance").toLocalDate());
+
+				clients.add(client);
+			}
+
+		} catch (SQLException e) {
+			throw new DaoException( e);
+		}
+
+		return clients;
+	}
 }
