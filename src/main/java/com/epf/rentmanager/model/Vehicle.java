@@ -15,6 +15,19 @@ public class Vehicle {
         this.constructeur = constructeur;
         this.modele = modele;
     }
+    public Vehicle(int id ) {
+        this.id =  id;
+
+    }
+    public Vehicle(long id ) {
+        this.id =  (int) id;
+
+    }
+
+    public void setModele(String modele) {
+        this.modele = modele;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -25,7 +38,7 @@ public class Vehicle {
         this.constructeur = constructeur;
     }
     public void setNb_places(int nb_places) {
-        this.id = nb_places;
+        this.nb_places = nb_places;
     }
     public int getId() {
         return id;
@@ -41,5 +54,9 @@ public class Vehicle {
 
     public String getModele() {
         return modele;
+    }
+    @Override
+    public String toString() {
+        return "Vehicle{id=" + id + ", constructeur='" + constructeur + "', nb_places=" + nb_places + ", modele='" + modele + "'}";
     }
 }

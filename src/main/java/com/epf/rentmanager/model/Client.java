@@ -20,7 +20,10 @@ private LocalDate naissance;
                 ", naissance=" + naissance +
                 '}';
     }
+    public Client(long id ) {
+        this.id = (int) id;
 
+    }
     public void setId(int id) {
         this.id = id;
     }
@@ -31,10 +34,10 @@ private LocalDate naissance;
     public void setNom (String nom) {
         this.nom = nom;
     }
-    public void setPrenom (String nom) {
+    public void setPrenom (String prenom) {
         this.prenom = prenom;
     }
-    public void setEmail (String nom) {
+    public void setEmail (String email) {
         this.email = email;
     }
     public void setNaissance (LocalDate naissance) {
@@ -51,6 +54,7 @@ private LocalDate naissance;
         this.email = email;
         this.naissance = naissance;
     }
+
 
     public int getId() {
         return id;
