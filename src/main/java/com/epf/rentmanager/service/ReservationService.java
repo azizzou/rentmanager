@@ -66,4 +66,19 @@ public class ReservationService {
             throw new ServiceException("Error counting reservations: " + e.getMessage(), e);
         }
     }
+    public Reservation findById(long reservationId) throws ServiceException {
+        try {
+            return reservationDao.findById(reservationId);
+        } catch (DaoException e) {
+            throw new ServiceException("Error finding reservation by ID: " + e.getMessage());
+        }
+    }
+
+    public void updateReservation(Reservation reservation) throws ServiceException {
+        try {
+            reservationDao.update(reservation);
+        } catch (DaoException e) {
+            throw new ServiceException("Error updating reservation: " + e.getMessage());
+        }
+    }
 }

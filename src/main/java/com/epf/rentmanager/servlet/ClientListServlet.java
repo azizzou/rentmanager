@@ -4,6 +4,8 @@ import com.epf.rentmanager.dao.ClientDao;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,11 +18,15 @@ import java.util.List;
 
 @WebServlet("/users")
 public class ClientListServlet extends HttpServlet {
+    @Autowired
+
     private ClientService clientService;
 
     @Override
     public void init() throws ServletException {
-        clientService = new ClientService(new ClientDao());
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+        this.clientService = new ClientService(new ClientDao());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

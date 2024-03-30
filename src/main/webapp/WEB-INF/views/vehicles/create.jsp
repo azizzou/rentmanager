@@ -1,4 +1,4 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <%@include file="/WEB-INF/views/common/head.jsp"%>
@@ -25,40 +25,33 @@
                     <!-- Horizontal Form -->
                     <div class="box">
                         <!-- form start -->
-                        <!-- Le  type de methode http qui sera appel� lors de action submit du formulaire -->
-                        <!-- est d�crit an l'attribut "method" de la balise forme -->
-                        <!-- action indique � quel "cible" sera envoyr la requ�te, ici notre Servlet qui sera bind sur -->
+                        <!-- Le type de méthode http qui sera appelé lors de l'action submit du formulaire -->
+                        <!-- est décrit dans l'attribut "method" de la balise form -->
+                        <!-- action indique à quelle "cible" sera envoyée la requête, ici notre Servlet qui sera bind sur -->
                         <!-- /vehicles/create -->
                         <form class="form-horizontal" method="post">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="manufacturer" class="col-sm-2 control-label">Marque</label>
-
-									<!-- Pour r�up�rer la valeur rentr�e dans un champ input de cette jsp au niveau de votre servlet -->
-									<!-- vous devez passer par les methodes getParameter de l'objet request, est sp�cifiant la valeur -->
-									<!-- de l'attribut "name" de l'input -->
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="manufacturer" name="manufacturer" placeholder="Marque" required>
+                                        <input type="text" class="form-control" id="manufacturer" name="manufacturer" placeholder="Marque" value="${empty vehicle ? '' : vehicle.constructeur}" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="modele" class="col-sm-2 control-label">Modele</label>
-
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="modele" name="modele" placeholder="Modele" required>
+                                        <input type="text" class="form-control" id="modele" name="modele" placeholder="Modele" value="${empty vehicle ? '' : vehicle.modele}" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="seats" class="col-sm-2 control-label">Nombre de places</label>
-
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="seats" name="seats" placeholder="Nombre de places" required>
+                                        <input type="text" class="form-control" id="seats" name="seats" placeholder="Nombre de places" value="${empty vehicle ? '' : vehicle.nb_places}" required>
                                     </div>
                                 </div>
                                 <!--
                                 <div class="form-group">
                                     <label for="owner" class="col-sm-2 control-label">Propriétaire</label>
-
                                     <div class="col-sm-10">
                                         <select class="form-control" id="owner" name="owner">
                                             <option value="1">John Doe</option>

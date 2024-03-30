@@ -10,6 +10,8 @@ import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.ServiceException;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,12 +26,16 @@ import java.util.List;
 @WebServlet("/rents/delete")
 public class ReservationDeleteServlet extends HttpServlet {
 
+
+
+    @Autowired
+
     private ReservationService reservationService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        // Initialisez votre ReservationService ici avec un ReservationDao valide
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
         this.reservationService = new ReservationService(new ReservationDao());
     }
 

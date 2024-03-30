@@ -1,6 +1,8 @@
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/model/Client.java
+/Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/configuration/WebConfiguration.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/ReservationCreateServlet.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/ui/hd.java
+/Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/ClientEditServlet.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/service/VehicleService.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/ReservationListServlet.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/VehicleCreateServlet.java
@@ -10,6 +12,7 @@
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/service/ReservationService.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/ui/cli/mainCLI.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/configuration/AppConfiguration.java
+/Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/ClientDeleteServlet.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/dao/ClientDao.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/model/Reservation.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/service/ClientService.java
@@ -17,7 +20,9 @@
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/model/Vehicle.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/dao/VehicleDao.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/ClientListServlet.java
+/Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/VehicleEditServlet.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/ClientCreateServlet.java
+/Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/ReservationEditServlet.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/ui/cli/ReservationCLI.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/service/ServiceException.java
 /Users/chelaifa/Desktop/rentmanager/src/main/java/com/epf/rentmanager/servlet/ReservationDeleteServlet.java

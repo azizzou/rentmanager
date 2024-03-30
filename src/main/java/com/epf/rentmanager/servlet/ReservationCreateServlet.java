@@ -10,6 +10,8 @@ import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.ServiceException;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +26,10 @@ import java.util.List;
 @WebServlet("/rents/create")
 public class ReservationCreateServlet extends HttpServlet {
 
+
+
+    @Autowired
+
     private ReservationService reservationService;
     private ClientService clientService;
     private VehicleService vehicleService;
@@ -31,11 +37,13 @@ public class ReservationCreateServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        // Initialize your services with valid DAO instances
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+        this.reservationService = new ReservationService(new ReservationDao());
         this.reservationService = new ReservationService(new ReservationDao());
         this.clientService = new ClientService(new ClientDao());
         this.vehicleService = new VehicleService(new VehicleDao());
     }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="/WEB-INF/views/common/head.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <%@ include file="/WEB-INF/views/common/head.jsp"%>
+</head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -32,6 +36,7 @@
                                     <label for="car" class="col-sm-2 control-label">Car</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="car" name="car">
+                                            <!-- Add options dynamically based on available vehicles -->
                                             <c:forEach items="${vehicles}" var="car">
                                                 <option value="${car.id}">${car.constructeur} ${car.modele}</option>
                                             </c:forEach>
@@ -43,7 +48,7 @@
                                     <label for="begin" class="col-sm-2 control-label">Begin Date</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="begin" name="begin" required
-                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<c:out value="${beginDate}"/>">
                                     </div>
                                 </div>
                                 <!-- End Date Input -->
@@ -51,7 +56,7 @@
                                     <label for="end" class="col-sm-2 control-label">End Date</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="end" name="end" required
-                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<c:out value="${endDate}"/>">
                                     </div>
                                 </div>
                             </div>

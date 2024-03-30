@@ -28,6 +28,8 @@ public class ReservationDao {
 	private static final String FIND_RESERVATIONS_BY_VEHICLE_QUERY = "SELECT id, client_id, debut, fin FROM Reservation WHERE vehicle_id=?;";
 	private static final String FIND_RESERVATIONS_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation;";
 	private static final String COUNT_RESERVATIONS_QUERY = "SELECT COUNT(id) AS count FROM Reservation;";
+	private static final String FIND_RESERVATION_BY_ID_QUERY = "SELECT id, client_id, vehicle_id, debut, fin FROM Reservation WHERE id=?;";
+	private static final String UPDATE_RESERVATION_QUERY = "UPDATE Reservation SET client_id=?, vehicle_id=?, debut=?, fin=? WHERE id=?;";
 
 	public long create(Reservation reservation) throws DaoException {
 		try (Connection connection = ConnectionManager.getConnection();
@@ -182,5 +184,46 @@ public class ReservationDao {
 			throw new DaoException(e);
 		}
 	}
+	public Reservation findById(long reservationId) throws DaoException {
+		try (Connection connection = ConnectionManager.getConnection();
+			 PreparedStatement preparedStatement = connection.prepareStatement(FIND_RESERVATION_BY_ID_QUERY)) {
+
+			preparedStatement.setLong(1, reservationId);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					Reservation reservation = new Reservation();
+					reservation.setId(resultSet.getLong("id"));
+					reservation.setClient_id(resultSet.getLong("client_id"));
+					reservation.setVehicle_id(resultSet.getLong("vehicle_id"));
+					reservation.setDebut(resultSet.getDate("debut").toLocalDate());
+					reservation.setFin(resultSet.getDate("fin").toLocalDate());
+					return reservation;
+				} else {
+					throw new DaoException("Reservation not found with ID: " + reservationId);
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new DaoException("Error finding reservation by ID: " + e.getMessage(), e);
+		}
+	}
+
+	public void update(Reservation reservation) throws DaoException {
+		try (Connection connection = ConnectionManager.getConnection();
+			 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_RESERVATION_QUERY)) {
+
+			preparedStatement.setLong(1, reservation.getClient_id());
+			preparedStatement.setLong(2, reservation.getVehicle_id());
+			preparedStatement.setDate(3, Date.valueOf(reservation.getDebut()));
+			preparedStatement.setDate(4, Date.valueOf(reservation.getFin()));
+			preparedStatement.setLong(5, reservation.getId());
+
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DaoException("Error updating reservation: " + e.getMessage(), e);
+		}
+	}
 }
+
 

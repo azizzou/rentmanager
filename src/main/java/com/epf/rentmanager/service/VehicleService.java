@@ -61,4 +61,13 @@ public class VehicleService {
 			throw new ServiceException("Error counting vehicles: " + e.getMessage(), e);
 		}
 	}
+	public long updateVehicle(Vehicle vehicle) throws ServiceException {
+		validateVehicle(vehicle);
+		try {
+			return vehicleDao.update(vehicle);
+		} catch (DaoException e) {
+			throw new ServiceException("Error updating vehicle: " + e.getMessage());
+		}
+	}
+
 }

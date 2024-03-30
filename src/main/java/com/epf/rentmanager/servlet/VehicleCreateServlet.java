@@ -5,6 +5,8 @@ import com.epf.rentmanager.dao.VehicleDao;  // Add this import statement
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ServiceException;
 import com.epf.rentmanager.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,11 +18,15 @@ import java.io.IOException;
 
 @WebServlet("/cars/create")
 public class VehicleCreateServlet extends HttpServlet {
+    @Autowired
+
     private VehicleService vehicleService;
 
     @Override
     public void init() throws ServletException {
-        vehicleService = new VehicleService(new VehicleDao());
+        super.init();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+        this.vehicleService = new VehicleService(new VehicleDao());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

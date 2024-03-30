@@ -62,4 +62,13 @@ public class ClientService {
 			throw new ServiceException("Error counting reservations: " + e.getMessage(), e);
 		}
 	}
+	public long updateClient(Client client) throws ServiceException {
+		validateClient(client); // Assurez-vous que les données du client sont valides avant la mise à jour
+		try {
+			return clientDao.update(client);
+		} catch (DaoException e) {
+			throw new ServiceException("Error updating client", e);
+		}
+	}
+
 }

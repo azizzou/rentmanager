@@ -25,7 +25,7 @@ public class ClientDao {
 	private static final String FIND_CLIENTS_QUERY = "SELECT id, nom, prenom, email, naissance FROM Client;";
 
 	private static final String COUNT_CLIENTS_QUERY = "SELECT COUNT(id) AS count FROM Client;";
-
+private static final String UPDATE_CLIENT = "UPDATE Client SET nom=?, prenom=?, email=?, naissance=? WHERE id=?;";
 	public long create(Client client) throws DaoException {
 		try (Connection connection = ConnectionManager.getConnection();
 			 PreparedStatement preparedStatement = connection.prepareStatement(CREATE_CLIENT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
@@ -136,6 +136,25 @@ public class ClientDao {
 
 		} catch (SQLException e) {
 			throw new DaoException(e);
+		}
+	}
+	public long update(Client client) throws DaoException {
+		try (Connection connection = ConnectionManager.getConnection();
+			 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_CLIENT)) {
+
+			preparedStatement.setString(1, client.getNom());
+			preparedStatement.setString(2, client.getPrenom());
+			preparedStatement.setString(3, client.getEmail());
+			preparedStatement.setDate(4, Date.valueOf(client.getNaissance()));
+			preparedStatement.setLong(5, client.getId());
+
+			int affectedRows = preparedStatement.executeUpdate();
+			if (affectedRows == 0) {
+				throw new DaoException("Updating client failed, no rows affected.");
+			}
+			return client.getId();
+		} catch (SQLException e) {
+			throw new DaoException("Error updating client", e);
 		}
 	}
 }
