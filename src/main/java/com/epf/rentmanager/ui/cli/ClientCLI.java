@@ -1,6 +1,7 @@
 package com.epf.rentmanager.ui.cli;
 
 import com.epf.rentmanager.configuration.AppConfiguration;
+import com.epf.rentmanager.dao.DaoException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ServiceException;
@@ -24,7 +25,7 @@ public class ClientCLI {
         this.clientService = context.getBean(ClientService.class);
     }
 
-    public void createClient() throws ServiceException, SQLException {
+    public void createClient() throws SQLException {
 
 
         try {
@@ -47,7 +48,7 @@ public class ClientCLI {
             long clientId = clientService.createClient(client);
 
             System.out.println("Client created successfully with ID: " + clientId);
-        } catch (ServiceException e) {
+        } catch (ServiceException | DaoException e) {
             System.err.println("Error creating client: " + e.getMessage());
             e.printStackTrace();
         }

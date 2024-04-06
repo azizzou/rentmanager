@@ -1,6 +1,8 @@
 package com.epf.rentmanager.service;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import com.epf.rentmanager.dao.DaoException;
@@ -17,13 +19,46 @@ public class ClientService {
 	public ClientService(ClientDao clientDao) {
 		this.clientDao = clientDao;
 	}
-	public long createClient(Client client) throws ServiceException, SQLException {
+	public long createClient(Client client) throws ServiceException, SQLException, DaoException {
 		validateClient(client);
+
+		if (calculateAge(client) ) {
+			throw new ServiceException("Le client doit avoir au moins 18 ans.");
+		}
+
+		if (isNameValid(client)) {
+			throw new ServiceException("Le nom et le prénom du client doivent faire au moins 3 caractères.");
+		}
+
+		if (emailExists(client) ){
+			throw new ServiceException("L'adresse email est déjà utilisée par un autre client.");
+		}
+
 		try {
 			return clientDao.create(client);
 		} catch (DaoException e) {
-			throw new ServiceException("Error creating client", e);
+			throw new ServiceException("Erreur lors de la création du client : " + e.getMessage());
 		}
+	}
+	private boolean calculateAge(Client client) {
+		LocalDate now = LocalDate.now();
+		Period period = Period.between(client.getNaissance(), now);
+		return period.getYears() >= 18;
+    }
+
+	private boolean emailExists( Client client) throws  DaoException {
+
+			List<Client> clients = clientDao.findAll();
+			for (Client Clientreche : clients) {
+				if (Clientreche.getEmail().equals(client.getEmail())) {
+					return true;
+				}
+			}
+			return false;
+
+	}
+	private boolean isNameValid(Client client) {
+		return client.getNom().length() >= 3&& client.getPrenom().length() >= 3;
 	}
 
 	public long deleteClient(Client client) throws ServiceException {

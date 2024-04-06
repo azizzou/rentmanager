@@ -1,6 +1,7 @@
 package com.epf.rentmanager.servlet;
 
 import com.epf.rentmanager.dao.ClientDao;
+import com.epf.rentmanager.dao.DaoException;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ServiceException;
@@ -57,7 +58,7 @@ public class ClientCreateServlet extends HttpServlet {
 
         try {
             clientService.createClient(newClient);
-        } catch (ServiceException | SQLException e) {
+        } catch (ServiceException | SQLException | DaoException e) {
             throw new RuntimeException(e);
         }
 
