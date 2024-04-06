@@ -31,7 +31,7 @@ public class ClientDetailServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        this.clientService = new ClientService(new ClientDao());
+        this.clientService = new ClientService(new ClientDao() , new ReservationDao());
         reservationService = new ReservationService(new ReservationDao());
     }
 
@@ -48,7 +48,7 @@ public class ClientDetailServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/users/details.jsp");
             dispatcher.forward(request, response);
         } catch (ServiceException | NumberFormatException e) {
-            throw new ServletException("Error fetching client details", e);
+            throw new ServletException("donnée client non trouvé ", e);
         }
     }
 }

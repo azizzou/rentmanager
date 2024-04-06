@@ -38,16 +38,16 @@ public class ReservationEditServlet extends HttpServlet {
             request.setAttribute("endDate", reservation.getFin());
 
             // Forward the request to the create.jsp
-            request.getRequestDispatcher("/WEB-INF/views/rents/create.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/rents/edit.jsp").forward(request, response);
         } catch (ServiceException | NumberFormatException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error retrieving reservation for editing");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error mise à jour réservation");
         }
     }
 
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         try {
             long reservationId = Long.parseLong(request.getParameter("id"));
             long clientId = Long.parseLong(request.getParameter("client"));

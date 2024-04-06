@@ -41,7 +41,7 @@ public class ClientServiceTest {
     }
 
     @Test(expected = ServiceException.class)
-    public void testCreateClientWithInvalidData() throws ServiceException, SQLException {
+    public void testCreateClientWithInvalidData() throws ServiceException, SQLException, DaoException {
         Client client = new Client();
 
         clientService.createClient(client);

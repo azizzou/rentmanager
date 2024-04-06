@@ -30,10 +30,10 @@ public class ClientCLI {
 
         try {
 
-            String nom = IOUtils.readString("Enter client's last name: ", true);
-            String prenom = IOUtils.readString("Enter client's first name: ", true);
-            String email = IOUtils.readString("Enter client's email: ", true);
-            LocalDate naissance = IOUtils.readDate("Enter client's birthdate (yyyy-MM-dd): ", true);
+            String nom = IOUtils.readString("Nom client: ", true);
+            String prenom = IOUtils.readString("prénom client: ", true);
+            String email = IOUtils.readString("Client email: ", true);
+            LocalDate naissance = IOUtils.readDate("date de naissance (yyyy-MM-dd): ", true);
 
 
 
@@ -43,13 +43,13 @@ public class ClientCLI {
             client.setEmail(email);
             client.setNaissance(Date.valueOf(naissance).toLocalDate());
 
-            System.out.println("Client object created. Calling service to create client...");
+            System.out.println("Client object a été crée");
 
             long clientId = clientService.createClient(client);
 
-            System.out.println("Client created successfully with ID: " + clientId);
+            System.out.println("Client crée avec ID: " + clientId);
         } catch (ServiceException | DaoException e) {
-            System.err.println("Error creating client: " + e.getMessage());
+            System.err.println("Erreur création client: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -58,10 +58,10 @@ public class ClientCLI {
         try {
 
             // Call service to get all clients
-            System.out.println("List of Clients:");
+            System.out.println("Liste des Clients:");
             clientService.findAllClients().forEach(System.out::println);
         } catch (ServiceException e) {
-            System.err.println("Error listing clients: " + e.getMessage());
+            System.err.println("erreur liste clients: " + e.getMessage());
         }
     }
 }

@@ -2,6 +2,7 @@ package com.epf.rentmanager.servlet;
 
 import com.epf.rentmanager.dao.ClientDao;
 import com.epf.rentmanager.dao.DaoException;
+import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ServiceException;
@@ -29,7 +30,7 @@ public class ClientCreateServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        this.clientService = new ClientService(new ClientDao());
+        this.clientService = new ClientService(new ClientDao(), new ReservationDao());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

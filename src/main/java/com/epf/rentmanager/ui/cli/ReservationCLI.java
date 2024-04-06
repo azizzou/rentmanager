@@ -20,84 +20,72 @@ public class ReservationCLI {
 
     public void createReservation() {
         try {
-            // Gather reservation information from user input
-            // Similar to how you gathered client and vehicle information in other parts of your CLI
-            long clientId = IOUtils.readInt("Enter Client ID: ", true);
-            long vehicleId = IOUtils.readInt("Enter Vehicle ID: ", true);
-            LocalDate debut = IOUtils.readDate("Enter start date (dd/MM/yyyy): ", true);
-            LocalDate fin = IOUtils.readDate("Enter end date (dd/MM/yyyy): ", true);
-            // Other reservation details...
+            long clientId = IOUtils.readInt("Client ID: ", true);
+            long vehicleId = IOUtils.readInt(" Vehicle ID: ", true);
+            LocalDate debut = IOUtils.readDate("  date début(dd/MM/yyyy): ", true);
+            LocalDate fin = IOUtils.readDate("  date fin (dd/MM/yyyy): ", true);
 
-            // Create Reservation object
             Reservation reservation = new Reservation();
             reservation.setClient_id(clientId);
             reservation.setVehicle_id(vehicleId);
             reservation.setDebut(debut);
             reservation.setFin(fin);
-            // Set other reservation details...
 
-            // Call service to create reservation
             long reservationId = reservationService.createReservation(reservation);
 
-            System.out.println("Reservation created successfully with ID: " + reservationId);
+            System.out.println("Reservation faite avec id : " + reservationId);
         } catch (ServiceException e) {
-            System.err.println("Error creating reservation: " + e.getMessage());
+            System.err.println("Errur création reservation: " + e.getMessage());
         }
     }
 
     public void listAllReservations() {
         try {
-            System.out.println("List of Reservations:");
+            System.out.println("Liste des Reservations:");
             List<Reservation> reservations = reservationService.findAllReservations();
 
 
             IOUtils.print(reservations.toString());
         } catch (ServiceException e) {
-            System.err.println("Error listing all reservations: " + e.getMessage());
+            System.err.println("Erreur liste des reservations: " + e.getMessage());
         }
     }
 
     public void listReservationsByClient() {
         try {
-            // Gather client information from user input
-            long clientId = IOUtils.readInt("Enter Client ID: " , true);
+            long clientId = IOUtils.readInt("Entrez Client ID: " , true);
 
-            // Call service to get reservations by client
             List<Reservation> reservations = reservationService.findReservationsByClientId(clientId);
 
-            System.out.println("List of Reservations for Client ID " + clientId + ":");
+            System.out.println("Liste réservation avec client ID " + clientId + ":");
             IOUtils.print(reservations.toString());
         } catch (ServiceException e) {
-            System.err.println("Error listing reservations by client: " + e.getMessage());
+            System.err.println("Erreur liste avec client id: " + e.getMessage());
         }
     }
 
     public void listReservationsByVehicle() {
         try {
-            // Gather vehicle information from user input
-            long vehicleId = IOUtils.readInt("Enter Vehicle ID: " , true);
+            long vehicleId = IOUtils.readInt("entrez Vehicle ID: " , true);
 
-            // Call service to get reservations by vehicle
             List<Reservation> reservations = reservationService.findReservationsByVehicleId(vehicleId);
 
-            System.out.println("List of Reservations for Vehicle ID " + vehicleId + ":");
+            System.out.println("Liste réservation avec véhicule ID " + vehicleId + ":");
             IOUtils.print(reservations.toString());
         } catch (ServiceException e) {
-            System.err.println("Error listing reservations by vehicle: " + e.getMessage());
+            System.err.println("Erreur liste véhicule: " + e.getMessage());
         }
     }
 
     public void deleteReservation() {
         try {
-            // Gather reservation information from user input
-            long reservationId = IOUtils.readInt("Enter Reservation ID to delete: ", true);
+            long reservationId = IOUtils.readInt("entrer Id de la réservation  à supprimer: ", true);
 
-            // Call service to delete reservation
             reservationService.deleteReservation(reservationId);
 
 
         } catch (ServiceException e) {
-            System.err.println("Error deleting reservation: " + e.getMessage());
+            System.err.println("erreur suppression reservation: " + e.getMessage());
         }
     }
 }

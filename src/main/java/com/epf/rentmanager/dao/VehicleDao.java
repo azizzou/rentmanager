@@ -116,7 +116,7 @@ public class VehicleDao {
 			if (resultSet.next()) {
 				return resultSet.getInt("count");
 			} else {
-				throw new DaoException("Error counting vehicles. No result.");
+				throw new DaoException("Erreur compter nombre client .");
 			}
 
 		} catch (SQLException e) {

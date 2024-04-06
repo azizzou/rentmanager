@@ -1,5 +1,6 @@
 package com.epf.rentmanager.servlet;
 
+import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.dao.VehicleDao;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.VehicleService;
@@ -28,7 +29,7 @@ public class VehicleListServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        this.vehicleService = new VehicleService(new VehicleDao());
+        this.vehicleService = new VehicleService(new VehicleDao(),new ReservationDao());
     }
 
     @Override
@@ -40,7 +41,7 @@ public class VehicleListServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/views/vehicles/list.jsp").forward(request, response);
         } catch (ServiceException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error retrieving vehicle list");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur lister vehicle ");
         }
     }
 }

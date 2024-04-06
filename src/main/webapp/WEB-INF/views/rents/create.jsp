@@ -1,10 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <%@ include file="/WEB-INF/views/common/head.jsp"%>
-</head>
+<%@ include file="/WEB-INF/views/common/head.jsp"%>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -43,14 +39,14 @@
                                     <label for="begin" class="col-sm-2 control-label">Begin Date</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="begin" name="begin" required
-                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<c:out value="${beginDate}"/>">
+                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="end" class="col-sm-2 control-label">End Date</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="end" name="end" required
-                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<c:out value="${endDate}"/>">
+                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                                     </div>
                                 </div>
                             </div>

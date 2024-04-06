@@ -38,18 +38,18 @@ private static final String UPDATE_CLIENT = "UPDATE Client SET nom=?, prenom=?, 
 			int affectedRows = preparedStatement.executeUpdate();
 
 			if (affectedRows == 0) {
-				throw new DaoException("Creating client failed, no rows affected.");
+				throw new DaoException("erreur création client.");
 			}
 
 			try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
 					return generatedKeys.getLong(1);
 				} else {
-					throw new DaoException("Creating client failed, no ID obtained." );
+					throw new DaoException("création client erreur pas d'id" );
 				}
 			}
 		} catch (SQLException e) {
-			throw new DaoException("Error creating client", e);
+			throw new DaoException("erreur création client", e);
 		}
 	}
 	
@@ -131,7 +131,7 @@ private static final String UPDATE_CLIENT = "UPDATE Client SET nom=?, prenom=?, 
 			if (resultSet.next()) {
 				return resultSet.getInt("count");
 			} else {
-				throw new DaoException("Error counting vehicles. No result.");
+				throw new DaoException("erreur compter véhicule.");
 			}
 
 		} catch (SQLException e) {
@@ -150,11 +150,11 @@ private static final String UPDATE_CLIENT = "UPDATE Client SET nom=?, prenom=?, 
 
 			int affectedRows = preparedStatement.executeUpdate();
 			if (affectedRows == 0) {
-				throw new DaoException("Updating client failed, no rows affected.");
+				throw new DaoException("erreur mise a jour client .");
 			}
 			return client.getId();
 		} catch (SQLException e) {
-			throw new DaoException("Error updating client", e);
+			throw new DaoException("Erreur mise à jour client", e);
 		}
 	}
 }

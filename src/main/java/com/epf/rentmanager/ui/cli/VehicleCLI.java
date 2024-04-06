@@ -2,7 +2,6 @@ package com.epf.rentmanager.ui.cli;
 
 import com.epf.rentmanager.configuration.AppConfiguration;
 import com.epf.rentmanager.model.Vehicle;
-import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ServiceException;
 import com.epf.rentmanager.service.VehicleService;
 import com.epf.rentmanager.utils.IOUtils;
@@ -24,41 +23,41 @@ public class VehicleCLI {
     public void createVehicle() {
 
         try {
-            IOUtils.print("Enter vehicle details:");
+            IOUtils.print("Entrer information véhicule:");
 
-            String manufacturer = IOUtils.readString("Manufacturer: ", true);
-            String model = IOUtils.readString("Model: ", true); // Add input for the model
-            int seats = IOUtils.readInt("Number of seats: ", true);
+            String manufacturer = IOUtils.readString("constructeur: ", true);
+            String model = IOUtils.readString("Model: ", true);
+            int seats = IOUtils.readInt("nombre de siége: ", true);
 
             Vehicle vehicle = new Vehicle();
             vehicle.setConstructeur(manufacturer);
-            vehicle.setModele(model); // Set the model property
+            vehicle.setModele(model);
             vehicle.setNb_places(seats);
 
             long vehicleId = vehicleService.createVehicle(vehicle);
 
-            IOUtils.print("Vehicle created successfully with ID: " + vehicleId);
+            IOUtils.print("Vehicle créer avec  l'ID: " + vehicleId);
         } catch (ServiceException e) {
-            System.err.println("Error creating vehicle: " + e.getMessage());
+            System.err.println("Erreur création vehicle: " + e.getMessage());
         }
     }
 
     public void listVehicles() {
 
         try {
-            IOUtils.print("List of Vehicles:");
+            IOUtils.print("Liste des Vehicles:");
 
             List<Vehicle> vehicles = vehicleService.findAllVehicles();
 
             if (vehicles.isEmpty()) {
-                IOUtils.print("No vehicles found.");
+                IOUtils.print("aucun véhicule trouvé .");
             } else {
                 for (Vehicle vehicle : vehicles) {
                     IOUtils.print(vehicle.toString());
                 }
             }
         } catch (ServiceException e) {
-            System.err.println("Error listing vehicles: " + e.getMessage());
+            System.err.println("Erreur liste véhicule: " + e.getMessage());
         }
     }
 }

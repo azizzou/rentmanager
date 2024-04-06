@@ -31,15 +31,15 @@ public class VehicleEditServlet extends HttpServlet {
             Vehicle vehicle = vehicleService.findVehicleById(id);
             if (vehicle != null) {
                 request.setAttribute("vehicle", vehicle);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/vehicles/create.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/vehicles/edit.jsp");
                 dispatcher.forward(request, response);
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Vehicle not found");
             }
         } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid vehicle ID");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalide vehicle ID");
         } catch (ServiceException e) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error retrieving vehicle");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur  vehicle non retrouver");
         }
     }
 
@@ -59,9 +59,9 @@ public class VehicleEditServlet extends HttpServlet {
             vehicleService.updateVehicle(updatedVehicle);
             response.sendRedirect(request.getContextPath() + "/cars");
         } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid vehicle data");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalide donnéevehicle ");
         } catch (ServiceException e) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error updating vehicle");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur mise à jour vehicle");
         }
     }
 }

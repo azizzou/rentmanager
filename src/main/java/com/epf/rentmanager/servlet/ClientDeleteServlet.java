@@ -35,7 +35,7 @@ public class ClientDeleteServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/users");
         } catch (NumberFormatException | ServiceException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error deleting client");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error suppression client");
         }
     }
 }

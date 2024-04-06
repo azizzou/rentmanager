@@ -1,6 +1,7 @@
 // VehicleCreateServlet.java
 package com.epf.rentmanager.servlet;
 
+import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.dao.VehicleDao;  // Add this import statement
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ServiceException;
@@ -26,7 +27,7 @@ public class VehicleCreateServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        this.vehicleService = new VehicleService(new VehicleDao());
+        this.vehicleService = new VehicleService(new VehicleDao(), new ReservationDao());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

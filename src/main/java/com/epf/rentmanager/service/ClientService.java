@@ -8,29 +8,36 @@ import java.util.List;
 import com.epf.rentmanager.dao.DaoException;
 
 import com.epf.rentmanager.dao.ClientDao;
+import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.model.Client;
+import com.epf.rentmanager.model.Reservation;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClientService {
 
 	private ClientDao clientDao;
+	private ReservationDao reservationDao;
 
-	public ClientService(ClientDao clientDao) {
+
+	public ClientService(ClientDao clientDao, ReservationDao reservationDao) {
 		this.clientDao = clientDao;
+		this.reservationDao = reservationDao;
 	}
+
+
 	public long createClient(Client client) throws ServiceException, SQLException, DaoException {
 		validateClient(client);
 
-		if (calculateAge(client) ) {
+		if (!calculateAge(client)) {
 			throw new ServiceException("Le client doit avoir au moins 18 ans.");
 		}
 
-		if (isNameValid(client)) {
+		if (!isNameValid(client)) {
 			throw new ServiceException("Le nom et le prénom du client doivent faire au moins 3 caractères.");
 		}
 
-		if (emailExists(client) ){
+		if (emailExists(client)) {
 			throw new ServiceException("L'adresse email est déjà utilisée par un autre client.");
 		}
 
@@ -40,6 +47,7 @@ public class ClientService {
 			throw new ServiceException("Erreur lors de la création du client : " + e.getMessage());
 		}
 	}
+
 	private boolean calculateAge(Client client) {
 		LocalDate now = LocalDate.now();
 		Period period = Period.between(client.getNaissance(), now);
@@ -62,18 +70,25 @@ public class ClientService {
 	}
 
 	public long deleteClient(Client client) throws ServiceException {
+
 		try {
+			List<Reservation> reservations = reservationDao.findResaByClientId(client.getId());
+			for (Reservation reservation : reservations) {
+				reservationDao.delete(reservation.getId());
+			}
+
 			return clientDao.delete(client);
 		} catch (SQLException | DaoException e) {
-			throw new ServiceException("Error deleting client: " + e.getMessage());
+			throw new ServiceException("erreur supprimer client: " + e.getMessage());
 		}
 	}
+
 
 	public Client findClientById(long id) throws ServiceException {
 		try {
 			return clientDao.findById(id);
 		} catch (SQLException | DaoException e) {
-			throw new ServiceException("Error finding client: " + e.getMessage());
+			throw new ServiceException("erreur trouver client: " + e.getMessage());
 		}
 	}
 
@@ -81,20 +96,20 @@ public class ClientService {
 		try {
 			return clientDao.findAll();
 		} catch (DaoException e) {
-			throw new ServiceException("Error finding all clients: " + e.getMessage());
+			throw new ServiceException(" erreur trouver tout client: " + e.getMessage());
 		}
 	}
 
 	private static void validateClient(Client client) throws ServiceException {
 		if (client.getNom().isEmpty() || client.getPrenom().isEmpty()) {
-			throw new ServiceException("Client name and first name cannot be empty.");
+			throw new ServiceException("erreur client dont le nom ou prénom est vide ");
 		}
 	}
 	public int countClient() throws ServiceException {
 		try {
 			return ClientDao.count();
 		} catch (DaoException e) {
-			throw new ServiceException("Error counting reservations: " + e.getMessage(), e);
+			throw new ServiceException("erreur décompte client " + e.getMessage(), e);
 		}
 	}
 	public long updateClient(Client client) throws ServiceException {
@@ -102,7 +117,7 @@ public class ClientService {
 		try {
 			return clientDao.update(client);
 		} catch (DaoException e) {
-			throw new ServiceException("Error updating client", e);
+			throw new ServiceException("érreur mise à jour client", e);
 		}
 	}
 

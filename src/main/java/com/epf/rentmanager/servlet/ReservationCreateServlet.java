@@ -40,8 +40,8 @@ public class ReservationCreateServlet extends HttpServlet {
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
         this.reservationService = new ReservationService(new ReservationDao());
         this.reservationService = new ReservationService(new ReservationDao());
-        this.clientService = new ClientService(new ClientDao());
-        this.vehicleService = new VehicleService(new VehicleDao());
+        this.clientService = new ClientService(new ClientDao(), new ReservationDao());
+        this.vehicleService = new VehicleService(new VehicleDao(), new ReservationDao());
     }
 
 
@@ -57,7 +57,7 @@ public class ReservationCreateServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/views/rents/create.jsp").forward(request, response);
         } catch (ServiceException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error retrieving data for reservation creation");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "erreur trouver info objet client et voiture de réservation");
         }
     }
 
@@ -82,7 +82,7 @@ public class ReservationCreateServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/rents");
         } catch (ServiceException | NumberFormatException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error creating reservation");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur création reservation");
         }
     }
 }

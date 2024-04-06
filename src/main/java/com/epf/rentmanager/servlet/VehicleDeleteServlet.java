@@ -1,6 +1,7 @@
 package com.epf.rentmanager.servlet;
 
 
+import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.dao.VehicleDao;
 import com.epf.rentmanager.model.Vehicle;
 import com.epf.rentmanager.service.ServiceException;
@@ -26,7 +27,7 @@ public class VehicleDeleteServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        this.vehicleService = new VehicleService(new VehicleDao());
+        this.vehicleService = new VehicleService(new VehicleDao(), new ReservationDao());
     }
 
         @Override
@@ -39,7 +40,7 @@ public class VehicleDeleteServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/cars");
             } catch (NumberFormatException | ServiceException e) {
                 e.printStackTrace();
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error deleting vehicle");
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur supression vehicle");
             }
         }
     }

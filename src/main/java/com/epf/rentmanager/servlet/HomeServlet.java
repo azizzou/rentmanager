@@ -25,9 +25,9 @@ public class HomeServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		vehicleService = new VehicleService(new VehicleDao());
+		vehicleService = new VehicleService(new VehicleDao(),new ReservationDao() );
 		reservationService = new ReservationService(new ReservationDao());
-		clientService = new ClientService(new ClientDao());
+		clientService = new ClientService(new ClientDao(), new ReservationDao());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

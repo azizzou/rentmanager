@@ -24,8 +24,8 @@ public class mainCLI {
         ReservationDao reservationDao = new ReservationDao();
 
 
-        ClientService clientService = new ClientService(clientDao);
-        VehicleService vehicleService = new VehicleService(vehicleDao);
+        ClientService clientService = new ClientService(clientDao, reservationDao);
+        VehicleService vehicleService = new VehicleService(vehicleDao, reservationDao);
         ReservationService reservationService = new ReservationService(reservationDao);
 
         ClientCLI clientCLI = new ClientCLI(clientService);
@@ -39,7 +39,7 @@ public class mainCLI {
         while (true) {
             displayMainMenu();
 
-            int choice = IOUtils.readInt("Enter your choice: ", true);
+            int choice = IOUtils.readInt("entrée votre choix: ", true);
 
             switch (choice) {
                 case 1:
@@ -52,11 +52,11 @@ public class mainCLI {
                     startReservationMenu(reservationCLI);
                     break;
                 case 4:
-                    System.out.println("Exiting the application. Goodbye!");
+                    System.out.println("bye bye ");
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("choix invalide, choisi bien.");
             }
         }
     }
@@ -65,7 +65,7 @@ public class mainCLI {
         while (true) {
             displayClientMenu();
 
-            int choice = IOUtils.readInt("Enter your choice: ", true);
+            int choice = IOUtils.readInt("entrez votre choix: ", true);
 
             switch (choice) {
                 case 1:
@@ -77,7 +77,7 @@ public class mainCLI {
                 case 3:
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("choix invalide, choisi bien.");
             }
         }
     }
@@ -86,7 +86,7 @@ public class mainCLI {
         while (true) {
             displayVehicleMenu();
 
-            int choice = IOUtils.readInt("Enter your choice: ", true);
+            int choice = IOUtils.readInt(" choisis: ", true);
 
             switch (choice) {
                 case 1:
@@ -98,7 +98,7 @@ public class mainCLI {
                 case 3:
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("choix invalide, choisi bien.");
             }
         }
     }
@@ -128,7 +128,7 @@ public class mainCLI {
                 case 6:
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("choix invalide, choisi bien");
             }
         }
     }

@@ -221,7 +221,7 @@ public class ReservationDao {
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new DaoException("Error updating reservation: " + e.getMessage(), e);
+			throw new DaoException("Erreur mise à jour réservation: " + e.getMessage(), e);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.epf.rentmanager.servlet;
 
 import com.epf.rentmanager.dao.ClientDao;
+import com.epf.rentmanager.dao.ReservationDao;
 import com.epf.rentmanager.model.Client;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ServiceException;
@@ -26,7 +27,7 @@ public class ClientListServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        this.clientService = new ClientService(new ClientDao());
+        this.clientService = new ClientService(new ClientDao(), new ReservationDao());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,7 +39,7 @@ public class ClientListServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/users/list.jsp");
             dispatcher.forward(request, response);
         } catch (ServiceException e) {
-            throw new ServletException("Error listing clients", e);
+            throw new ServletException("Erreur lister tout  clients", e);
         }
     }
 }

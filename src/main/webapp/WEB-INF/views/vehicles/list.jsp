@@ -43,9 +43,6 @@
                                         <td>${vehicle.modele}</td>
                                         <td>${vehicle.nb_places}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/cars/detail?id=${vehicle.id}">
-                                                <i class="fa fa-play"></i>
-                                            </a>
                                             <a class="btn btn-success" href="${pageContext.request.contextPath}/cars/edit?id=${vehicle.id}">
                                                 <i class="fa fa-edit"></i>
                                             </a>

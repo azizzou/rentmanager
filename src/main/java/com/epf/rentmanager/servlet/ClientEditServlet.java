@@ -30,7 +30,7 @@ public class ClientEditServlet extends HttpServlet {
             throws ServletException, IOException {
         String clientIdParam = request.getParameter("id");
         if (clientIdParam == null || clientIdParam.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/users"); // Redirige vers la liste des utilisateurs si l'identifiant n'est pas spécifié
+            response.sendRedirect(request.getContextPath() + "/users");
             return;
         }
 
@@ -39,13 +39,13 @@ public class ClientEditServlet extends HttpServlet {
             Client client = clientService.findClientById(clientId);
             if (client != null) {
                 request.setAttribute("client", client);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/users/create.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/users/edit.jsp");
                 dispatcher.forward(request, response);
             } else {
-                response.sendRedirect(request.getContextPath() + "/users"); // Redirige vers la liste des utilisateurs si l'utilisateur n'est pas trouvé
+                response.sendRedirect(request.getContextPath() + "/users");
             }
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/users"); // Redirige vers la liste des utilisateurs si l'identifiant n'est pas un nombre valide
+            response.sendRedirect(request.getContextPath() + "/users");
         } catch (ServiceException e) {
             throw new ServletException("Error fetching client for edit", e);
         }
@@ -55,7 +55,7 @@ public class ClientEditServlet extends HttpServlet {
             throws ServletException, IOException {
         String clientIdParam = request.getParameter("id");
         if (clientIdParam == null || clientIdParam.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/users"); // Redirige vers la liste des utilisateurs si l'identifiant n'est pas spécifié
+            response.sendRedirect(request.getContextPath() + "/users");
             return;
         }
 
@@ -77,7 +77,7 @@ public class ClientEditServlet extends HttpServlet {
             }
             response.sendRedirect(request.getContextPath() + "/users");
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/users"); // Redirige vers la liste des utilisateurs si l'identifiant n'est pas un nombre valide
+            response.sendRedirect(request.getContextPath() + "/users");
         } catch (ServiceException e) {
             throw new ServletException("Error updating client", e);
         }

@@ -42,7 +42,7 @@ public class ReservationListServlet extends HttpServlet {
             dispatcher.forward(request, response);
         } catch (ServiceException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error retrieving reservations");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur lister  reservations");
         }
     }
 }

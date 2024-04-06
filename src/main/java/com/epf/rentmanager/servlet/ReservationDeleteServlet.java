@@ -50,7 +50,7 @@ public class ReservationDeleteServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/rents");
         } catch (NumberFormatException | ServiceException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error deleting reservation");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur supression reservation");
         }
     }
 }
