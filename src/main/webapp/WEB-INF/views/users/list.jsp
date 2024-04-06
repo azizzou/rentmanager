@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Ajoutez vos éléments head ici -->
     <%@ include file="/WEB-INF/views/common/head.jsp"%>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">

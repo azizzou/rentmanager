@@ -15,7 +15,6 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-3">
-                    <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
                             <h3 class="profile-username text-center">${client.prenom} ${client.nom} (${client.email})</h3>
@@ -23,14 +22,10 @@
                                 <li class="list-group-item">
                                     <b>Reservation(s)</b> <a class="pull-right">${fn:length(reservations)}</a>
                                 </li>
-                                <!-- You can add other client-related information here -->
                             </ul>
                         </div>
-                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box -->
                 </div>
-                <!-- /.col -->
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
@@ -87,21 +82,14 @@
                                     </table>
                                 </div>
                             </div>
-                            <!-- /.tab-pane -->
                         </div>
-                        <!-- /.tab-content -->
                     </div>
-                    <!-- /.nav-tabs-custom -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
         </section>
-        <!-- /.content -->
     </div>
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </div>
-<!-- ./wrapper -->
 <%@ include file="/WEB-INF/views/common/js_imports.jsp" %>
 </body>
 </html>

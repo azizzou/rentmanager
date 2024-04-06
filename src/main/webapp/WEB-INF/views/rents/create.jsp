@@ -19,31 +19,26 @@
                     <div class="box">
                         <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/rents/create">
                             <div class="box-body">
-                                <!-- Client Dropdown -->
                                 <div class="form-group">
                                     <label for="client" class="col-sm-2 control-label">Client</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="client" name="client">
-                                            <!-- Add options dynamically based on available clients -->
                                             <c:forEach items="${clients}" var="client">
                                                 <option value="${client.id}">${client.nom} ${client.prenom}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                 </div>
-                                <!-- Car Dropdown -->
                                 <div class="form-group">
                                     <label for="car" class="col-sm-2 control-label">Car</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="car" name="car">
-                                            <!-- Add options dynamically based on available vehicles -->
                                             <c:forEach items="${vehicles}" var="car">
                                                 <option value="${car.id}">${car.constructeur} ${car.modele}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                 </div>
-                                <!-- Begin Date Input -->
                                 <div class="form-group">
                                     <label for="begin" class="col-sm-2 control-label">Begin Date</label>
                                     <div class="col-sm-10">
@@ -51,7 +46,6 @@
                                                data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<c:out value="${beginDate}"/>">
                                     </div>
                                 </div>
-                                <!-- End Date Input -->
                                 <div class="form-group">
                                     <label for="end" class="col-sm-2 control-label">End Date</label>
                                     <div class="col-sm-10">
